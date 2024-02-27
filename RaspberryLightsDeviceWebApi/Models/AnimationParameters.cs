@@ -5,7 +5,7 @@ namespace RaspberryLightsDeviceWebApi.Models;
 
 public class AnimationParameters
 {
-    public Animation Animation { get; set; }
+    public Animation Animation { get; set; } = Animation.Off;
     public SimpleColor CustomColor { get; set; }
     public SpeedType SpeedType { get; set; }
     public int UserDefinedSpeed { get; set; }

@@ -41,6 +41,14 @@ public class LedController : ControllerBase
         return Ok();
     }
 
+    [HttpGet("getCurrentAnimationParameters")]
+    public async Task<IActionResult> GetCurrentAnimationParameters()
+    {
+        var currentAnimationParameters = _ledService.GetCurrentAnimationParameters();
+
+        return Ok(currentAnimationParameters);
+    }
+    
     [HttpPost("startAnimation")]
     public async Task<IActionResult> StartAnimation([FromBody] AnimationParameters parameters)
     {

@@ -10,14 +10,22 @@ public class LedStripService : ILedStripService
 {
     private const int LedCount = 108;
     private readonly IOBD2Service _obd2Service;
+    private static AnimationParameters _currentAnimationParameters = new AnimationParameters();
 
     public LedStripService(IOBD2Service obd2Service)
     {
         _obd2Service = obd2Service;
     }
 
+    public AnimationParameters GetCurrentAnimationParameters()
+    {
+        return _currentAnimationParameters;
+    }
+    
     public async Task StartAnimation(AnimationParameters parameters, CancellationToken cancellationToken)
     {
+        _currentAnimationParameters = parameters;
+        
         var settings = Settings.CreateDefaultSettings();
         var controller = settings.AddController(LedCount, Pin.Gpio18, StripType.WS2812_STRIP, brightness: parameters.Brightness);
 
