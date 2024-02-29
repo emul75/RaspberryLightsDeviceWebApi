@@ -15,7 +15,7 @@ public class LedController : ControllerBase
     private Task _runningAnimation = Task.CompletedTask;
 
 
-    public LedController(ILedStripService ledService, IConfiguration configuration, INgrokService ngrokService)
+    public LedController(ILedStripService ledService, INgrokService ngrokService)
     {
         _ledService = ledService;
         _ngrokService = ngrokService;
