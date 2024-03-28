@@ -10,7 +10,7 @@ public class LedStripService : ILedStripService
 {
     private const int LedCount = 108;
     private readonly IOBD2Service _obd2Service;
-    private static AnimationParameters _currentAnimationParameters = new AnimationParameters();
+    private static AnimationParameters _currentAnimationParameters = new();
 
     public LedStripService(IOBD2Service obd2Service)
     {
@@ -66,10 +66,10 @@ public class LedStripService : ILedStripService
             {
                 for (var j = 0; j < LedCount; j++)
                 {
-                    if (parameters.Animation == Animation.ColorPulse)
-                        controller.SetLED(j, ColorPulse(parameters.SystemDrawingColor, i));
-                    else
-                        controller.SetLED(j, colorWheelFunc((j * 256 / LedCount + i) % 255));
+                    controller.SetLED(j,
+                        parameters.Animation == Animation.ColorPulse
+                            ? ColorPulse(parameters.SystemDrawingColor, i)
+                            : colorWheelFunc((j * 256 / LedCount + i) % 255));
                 }
 
                 device.Render();

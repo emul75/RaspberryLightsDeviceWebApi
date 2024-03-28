@@ -12,8 +12,8 @@ public class NgrokService : INgrokService
     private readonly IConfiguration _configuration;
     private readonly HttpClient _httpClient = new();
 
-    private static string? publicUrl { get; set; }
-    private const string NgrokDownloadUrl = "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip";
+    private static string? PublicUrl { get; set; }
+    private const string NgrokDownloadUrl = "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.zip";
     private const string NgrokPath = "./ngrok";
     private const string NgrokApiUrl = "http://127.0.0.1:4040/api/tunnels";
     private const string UpdateIpUrl = "https://raspberrylights.azurewebsites.net/Device/UpdateIp";
@@ -47,7 +47,7 @@ public class NgrokService : INgrokService
         var startInfo = new ProcessStartInfo
         {
             FileName = NgrokPath,
-            Arguments = $"http {LocalApiUrl} -authtoken={ngrokAuthToken}",
+            Arguments = $"http {LocalApiUrl} --authtoken={ngrokAuthToken}",
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true
@@ -104,14 +104,14 @@ public class NgrokService : INgrokService
 
     private async Task SendNewIpToWebApp(NgrokTunnelsResponse tunnels)
     {
-        publicUrl = tunnels.Tunnels.First().PublicUrl;
+        PublicUrl = tunnels.Tunnels.First().PublicUrl;
 
         var deviceId = _configuration.GetValue<string>("DeviceGuid");
 
         var updateDeviceIpCommand = new UpdateDeviceIpCommand
         {
             DeviceId = deviceId,
-            NewIp = publicUrl
+            NewIp = PublicUrl
         };
 
         var updateIpContent =
