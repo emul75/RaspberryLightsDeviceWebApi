@@ -98,8 +98,10 @@ public class NgrokService : INgrokService
                 throw new Exception("Failed to download ngrok.");
             }
         }
-
-        Console.WriteLine("ngrok was already downloaded");
+        else
+        {
+            Console.WriteLine("ngrok was already downloaded");
+        }
     }
 
     private async Task SendNewIpToWebApp(NgrokTunnelsResponse tunnels)
