@@ -17,7 +17,7 @@ public class NgrokService : INgrokService
     private const string NgrokPath = "./ngrok";
     private const string NgrokApiUrl = "http://127.0.0.1:4040/api/tunnels";
     private const string UpdateIpUrl = "https://raspberrylights.azurewebsites.net/Device/UpdateIp";
-    private const string LocalApiUrl = "https://localhost:5001";
+    private const string LocalApiUrl = "https://localhost:5252";
 
     public NgrokService(IConfiguration configuration)
     {
